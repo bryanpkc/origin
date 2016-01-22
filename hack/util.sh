@@ -598,6 +598,7 @@ function install_registry {
 }
 
 function wait_for_registry {
+#[lei_modify]	wait_for_command '[[ "$(oc get endpoints docker-registry --output-version=v1 --config=${ADMIN_KUBECONFIG} || echo "0")" != "0" ]]' $((5*TIME_MIN))
 	wait_for_command '[[ "$(oc get endpoints docker-registry --output-version=v1 --template="{{ if .subsets }}{{ len .subsets }}{{ else }}0{{ end }}" --config=${ADMIN_KUBECONFIG} || echo "0")" != "0" ]]' $((5*TIME_MIN))
 }
 

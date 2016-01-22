@@ -17,8 +17,8 @@ cd "${OS_ROOT}"
 # TODO: support different OS's?
 os::build::detect_local_release_tars "linux-64bit"
 
-mkdir -p "${OS_OUTPUT_BINPATH}/linux/amd64"
-tar mxzf "${OS_PRIMARY_RELEASE_TAR}" --strip-components=1 -C "${OS_OUTPUT_BINPATH}/linux/amd64"
-tar mxzf "${OS_IMAGE_RELEASE_TAR}" --strip-components=1 -C "${OS_OUTPUT_BINPATH}/linux/amd64"
+mkdir -p "${OS_OUTPUT_BINPATH}/linux/s390x"
+tar mxzf "${OS_PRIMARY_RELEASE_TAR}" --strip-components=1 -C "${OS_OUTPUT_BINPATH}/linux/s390x"
+tar mxzf "${OS_IMAGE_RELEASE_TAR}" --strip-components=1 -C "${OS_OUTPUT_BINPATH}/linux/s390x"
 
 os::build::make_openshift_binary_symlinks

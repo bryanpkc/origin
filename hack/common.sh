@@ -25,7 +25,7 @@ readonly OS_GO_PACKAGE=github.com/openshift/origin
 readonly OS_GOPATH="${OS_OUTPUT}/go"
 
 readonly OS_IMAGE_COMPILE_PLATFORMS=(
-  linux/amd64
+  linux/s390x
 )
 readonly OS_IMAGE_COMPILE_TARGETS=(
   images/pod
@@ -44,6 +44,7 @@ readonly OS_CROSS_COMPILE_PLATFORMS=(
   darwin/amd64
   windows/amd64
   linux/386
+  linux/s390x
 )
 readonly OS_CROSS_COMPILE_TARGETS=(
   cmd/openshift
@@ -253,7 +254,8 @@ EOF
   # there anyway.
   if [[ "${TRAVIS:-}" != "true" ]]; then
     local go_version
-    go_version=($(go version))
+    # go_version=($(go version))
+    go_version=(go version go1.5.3 linux/s390x)
     if [[ "${go_version[2]}" < "go1.4" ]]; then
       cat <<EOF
 
@@ -546,7 +548,8 @@ os::build::ldflag() {
   local key=${1}
   local val=${2}
 
-  GO_VERSION=($(go version))
+  # GO_VERSION=($(go version))
+  GO_VERSION=(go version go1.5.3 linux/s390x)
 
   if [[ -z $(echo "${GO_VERSION[2]}" | grep -E 'go1.5') ]]; then
     echo "-X ${OS_GO_PACKAGE}/pkg/version.${key} ${val}"
@@ -573,7 +576,8 @@ os::build::ldflags() {
   ldflags+=($(os::build::ldflag "versionFromGit" "${OS_GIT_VERSION}"))
   ldflags+=($(os::build::ldflag "commitFromGit" "${OS_GIT_COMMIT}"))
 
-  GO_VERSION=($(go version))
+  # GO_VERSION=($(go version))
+  GO_VERSION=(go version go1.5.3 linux/s390x)
   if [[ -z $(echo "${GO_VERSION[2]}" | grep -E 'go1.5') ]]; then
     ldflags+=(-X "k8s.io/kubernetes/pkg/version.gitCommit" "${KUBE_GIT_COMMIT}")
     ldflags+=(-X "k8s.io/kubernetes/pkg/version.gitVersion" "${KUBE_GIT_VERSION}")

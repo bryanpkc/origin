@@ -74,9 +74,9 @@ echo "Log in as 'e2e-user' to see the 'test' project."
 install_router
 install_registry
 
-echo "[INFO] Pre-pulling and pushing ruby-22-centos7"
-docker pull centos/ruby-22-centos7:latest
-echo "[INFO] Pulled ruby-22-centos7"
+echo "[INFO] Pre-pulling and pushing ruby-s390x"
+docker pull s390x/ruby
+echo "[INFO] Pulled ruby-s390x"
 
 echo "[INFO] Waiting for Docker registry pod to start"
 wait_for_registry
@@ -112,10 +112,10 @@ echo "[INFO] Docker login as e2e-user to ${DOCKER_REGISTRY}"
 docker login -u e2e-user -p ${e2e_user_token} -e e2e-user@openshift.com ${DOCKER_REGISTRY}
 echo "[INFO] Docker login successful"
 
-echo "[INFO] Tagging and pushing ruby-22-centos7 to ${DOCKER_REGISTRY}/cache/ruby-22-centos7:latest"
-docker tag -f centos/ruby-22-centos7:latest ${DOCKER_REGISTRY}/cache/ruby-22-centos7:latest
-docker push ${DOCKER_REGISTRY}/cache/ruby-22-centos7:latest
-echo "[INFO] Pushed ruby-22-centos7"
+echo "[INFO] Tagging and pushing ruby-s390x to ${DOCKER_REGISTRY}/cache/ruby-s390x:latest"
+docker tag -f s390x/ruby-s390x:latest ${DOCKER_REGISTRY}/cache/ruby-s390x:latest
+docker push ${DOCKER_REGISTRY}/cache/ruby-s390x:latest
+echo "[INFO] Pushed ruby-s390x"
 
 # check to make sure an image-pusher can push an image
 oc policy add-role-to-user system:image-pusher pusher
