@@ -4,7 +4,7 @@
 # The standard name for this image is openshift/openvswitch
 #
 
-FROM centos:centos7
+FROM rhel7
 
 MAINTAINER Scott Dodson <sdodson@redhat.com>
 
