@@ -383,14 +383,16 @@ os::build::place_bins() {
           platform="mac" OS_RELEASE_ARCHIVE="openshift-origin-client-tools" os::build::archive_zip "${OS_BINARY_RELEASE_CLIENT_MAC[@]}"
         elif [[ $platform == "linux/386" ]]; then
           platform="linux/32bit" OS_RELEASE_ARCHIVE="openshift-origin-client-tools" os::build::archive_tar "${OS_BINARY_RELEASE_CLIENT_LINUX[@]}"
-        elif [[ $platform == "linux/amd64" ]]; then
+	elif [[ $platform == "linux/amd64" ]]; then
+          platform="linux/64bit" OS_RELEASE_ARCHIVE="openshift-origin-client-tools" os::build::archive_tar "${OS_BINARY_RELEASE_CLIENT_LINUX[@]}"
+        elif [[ $platform == "linux/s390x" ]]; then
           platform="linux/64bit" OS_RELEASE_ARCHIVE="openshift-origin-client-tools" os::build::archive_tar "${OS_BINARY_RELEASE_CLIENT_LINUX[@]}"
           platform="linux/64bit" OS_RELEASE_ARCHIVE="openshift-origin-server" os::build::archive_tar "${OS_BINARY_RELEASE_SERVER_LINUX[@]}"
         else
           echo "++ ERROR: No release type defined for $platform"
         fi
       else
-        if [[ $platform == "linux/amd64" ]]; then
+        if [[ $platform == "linux/s390x" ]]; then
           platform="linux/64bit" os::build::archive_tar "./*"
         else
           echo "++ ERROR: No release type defined for $platform"
