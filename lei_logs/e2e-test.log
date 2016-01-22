@@ -1,0 +1,181 @@
+[INFO] Starting end-to-end test
+[INFO] Creating certificates for the OpenShift server
+Generated new key pair as /tmp/openshift-e2e/openshift.local.config/master/serviceaccounts.public.key and /tmp/openshift-e2e/openshift.local.config/master/serviceaccounts.private.key
+[INFO] Creating OpenShift node config
+Generating node credentials ...
+Created node config for 9.26.176.246 in /tmp/openshift-e2e/openshift.local.config/node-9.26.176.246
+[INFO] Creating OpenShift config
+Wrote master config to: /tmp/openshift-e2e/openshift.local.config/master/master-config.yaml
+Generating node credentials ...
+Created node config for 9.26.176.246 in /tmp/openshift-e2e/openshift.local.config/node-9.26.176.246
+[INFO] To debug: export KUBECONFIG=/tmp/openshift-e2e/openshift.local.config/master/admin.kubeconfig
+[INFO] openshift v1.1-741-g75d6e5e-dirty
+kubernetes v1.1.0-origin-1107-g4c8e6f4
+etcd 2.1.2
+[INFO] Server logs will be at:    /tmp/openshift-e2e/logs/openshift.log
+[INFO] Test artifacts will be in: /tmp/openshift-e2e/artifacts
+[INFO] Volumes dir is:            /tmp/openshift-e2e/volumes
+[INFO] Config dir is:             /tmp/openshift-e2e/openshift.local.config
+[INFO] Using images:              openshift/origin-${component}:latest
+[INFO] MasterIP is:               https://9.26.176.246:8443
+[INFO] Scan of OpenShift related processes already up via ps -ef	| grep openshift : 
+root     54868 54700  0 15:35 pts/1    00:00:00 grep openshift
+[INFO] Starting OpenShift server
+[INFO] OpenShift server start at: 
+Tue Jan 12 15:35:16 EST 2016
+apiserver: ok
+[INFO] kubelet: ok
+apiserver(ready): ok
+apiserver(nodes): {
+  "kind": "Node",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "9.26.176.246",
+    "selfLink": "/api/v1/nodes/9.26.176.246",
+    "uid": "00aed8b6-b96c-11e5-9841-020000000032",
+    "resourceVersion": "195",
+    "creationTimestamp": "2016-01-12T20:35:22Z",
+    "labels": {
+      "kubernetes.io/hostname": "9.26.176.246"
+    }
+  },
+  "spec": {
+    "externalID": "9.26.176.246"
+  },
+  "status": {
+    "capacity": {
+      "cpu": "8",
+      "memory": "16279044Ki",
+      "pods": "40"
+    },
+    "conditions": [
+      {
+        "type": "Ready",
+        "status": "True",
+        "lastHeartbeatTime": "2016-01-12T20:35:22Z",
+        "lastTransitionTime": "2016-01-12T20:35:22Z",
+        "reason": "KubeletReady",
+        "message": "kubelet is posting ready status"
+      }
+    ],
+    "addresses": [
+      {
+        "type": "LegacyHostIP",
+        "address": "9.26.176.246"
+      },
+      {
+        "type": "InternalIP",
+        "address": "9.26.176.246"
+      }
+    ],
+    "daemonEndpoints": {
+      "kubeletEndpoint": {
+        "Port": 10250
+      }
+    },
+    "nodeInfo": {
+      "machineID": "af8eb33b896e4527942946a89dd228ed",
+      "systemUUID": "",
+      "bootID": "c6a67e7f-b7d3-41b0-ae4b-c57c04992f7f",
+      "kernelVersion": "3.10.0-229.7.2.el7.s390x",
+      "osImage": "Red Hat Enterprise Linux Server 7.2 (Maipo)",
+      "containerRuntimeVersion": "docker://1.8.3",
+      "kubeletVersion": "v1.1.0-origin-1107-g4c8e6f4",
+      "kubeProxyVersion": "v1.1.0-origin-1107-g4c8e6f4"
+    }
+  }
+}
+[INFO] OpenShift server health checks done at: 
+Tue Jan 12 15:35:23 EST 2016
+imagestream "ruby" created
+imagestream "nodejs" created
+imagestream "perl" created
+imagestream "php" created
+imagestream "python" created
+imagestream "wildfly" created
+imagestream "mysql" created
+imagestream "postgresql" created
+imagestream "mongodb" created
+imagestream "jenkins" created
+template "ruby-helloworld-sample" created
+template "nodejs-helloworld-sample" created
+template "mongodb-ephemeral" created
+template "mysql-ephemeral" created
+template "postgresql-ephemeral" created
+Created project test
+Created project docker
+Created project custom
+Created project cache
+The console should be available at https://9.26.176.246:8443/console.
+Log in as 'e2e-user' to see the 'test' project.
+[INFO] Installing the router
+serviceaccount "router" created
+securitycontextconstraints "privileged" replaced
+password for stats user admin has been set to ocVaVbaof1
+DeploymentConfig "router" created
+Service "router" created
+[INFO] Installing the registry
+DeploymentConfig "docker-registry" created
+Service "docker-registry" created
+[INFO] Pre-pulling and pushing ruby-22-centos7
+latest: Pulling from centos/ruby-22-centos7
+fa5be2806d4c: Already exists
+d443e41fd515: Already exists
+6ef58edabc63: Already exists
+d37ba1ea0396: Already exists
+63d7c390f676: Already exists
+74de5334061b: Already exists
+0b4cc1a145a9: Already exists
+a8c1efbf448f: Already exists
+Digest: sha256:72bc0354eca9ad377bd9d36ec7feabf8aaa1b76d38dfce10db08d7671e581429
+Status: Image is up to date for centos/ruby-22-centos7:latest
+[INFO] Pulled ruby-22-centos7
+[INFO] Waiting for Docker registry pod to start
+[INFO] Waiting for command to finish: '[[ "$(oc get endpoints docker-registry --output-version=v1 --template="{{ if .subsets }}{{ len .subsets }}{{ else }}0{{ end }}" --config=${ADMIN_KUBECONFIG} || echo "0")" != "0" ]]'...
+[ ERR] Gave up waiting for: '[[ "$(oc get endpoints docker-registry --output-version=v1 --template="{{ if .subsets }}{{ len .subsets }}{{ else }}0{{ end }}" --config=${ADMIN_KUBECONFIG} || echo "0")" != "0" ]]'
+!!! Error in hack/../test/end-to-end/../../hack/util.sh:283
+	'return 1' exited with status 1
+Call stack:
+	1: hack/../test/end-to-end/../../hack/util.sh:283 wait_for_registry(...)
+	2: hack/../test/end-to-end/core.sh:82 main(...)
+Exiting with status 1
+!!! Error in hack/test-end-to-end.sh:51
+	'${OS_ROOT}/test/end-to-end/core.sh' exited with status 1
+Call stack:
+	1: hack/test-end-to-end.sh:51 main(...)
+Exiting with status 1
+
+[FAIL] !!!!! Test Failed !!!!
+
+[INFO] Dumping container logs to /tmp/openshift-e2e/logs
+Error: No such image or container: b91d70ab0fd8
+Error: No such image or container: 9346ca6371eb
+Error: No such image or container: 98308f60b4db
+Error: No such image or container: 82da7d5ef6ce
+Error: No such image or container: 8eec31899193
+[INFO] Dumping all resources to /tmp/openshift-e2e/logs/export_all.json
+Logged into "https://9.26.176.246:8443" as "system:admin" using existing credentials.
+
+You have access to the following projects and can switch between them with 'oc project <projectname>':
+
+  * cache
+  * custom
+  * default (current)
+  * docker
+  * openshift
+  * openshift-infra
+  * test
+
+Using project "default".
+[INFO] Dumping etcd contents to /tmp/openshift-e2e/artifacts/etcd_dump.json
+
+[INFO] Tearing down test
+[INFO] Stopping k8s docker containers
+[INFO] Removing k8s docker containers
+cp: cannot stat ‘’: No such file or directory
+hack/../hack/util.sh: line 500: : No such file or directory
+hack/../hack/util.sh: line 501: : No such file or directory
+rm: cannot remove ‘.tmp’: No such file or directory
+[INFO] Cleanup complete
+[INFO] Exiting
+hack/test-end-to-end.sh took 380 seconds
