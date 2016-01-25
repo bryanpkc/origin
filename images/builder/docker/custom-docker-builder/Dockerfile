@@ -16,7 +16,14 @@
 #
 FROM openshift/origin-base
 
-RUN yum install -y --enablerepo=centosplus gettext automake make docker
+RUN yum install -y gettext automake make
+
+# Install docker
+RUN mkdir /docker && cd /docker
+RUN wget ftp://ftp.unicamp.br/pub/linuxpatch/s390x/redhat/rhel7.1/docker/docker-1.8.3-rhel7.1-20151027.tar.gz
+RUN tar -xvzf docker-1.8.3-rhel7.1-20151027.tar.gz && cp docker-1.8.3-rhel7.1-20151027/docker /usr/bin
+
+
 ENV HOME /root
 ADD ./build.sh /tmp/build.sh
 CMD ["/tmp/build.sh"]

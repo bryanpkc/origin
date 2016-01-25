@@ -27,6 +27,7 @@ RUN git clone http://git.haproxy.org/git/haproxy-1.6.git
 
 # Build and install Node.js
 RUN cd haproxy-1.6/ && make TARGET=linux26 USE_OPENSSL=1 && make install
+RUN mv /usr/local/sbin/haproxy /usr/sbin
 
 RUN \
     mkdir -p /var/lib/containers/router/{certs,cacerts} && \
