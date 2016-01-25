@@ -13,8 +13,17 @@ MAINTAINER Devan Goodwin <dgoodwin@redhat.com>
 # We need to install openvswitch for the client portions, the daemons are expected
 # to run in another container
 
-ADD https://copr.fedoraproject.org/coprs/maxamillion/origin-next/repo/epel-7/maxamillion-origin-next-epel-7.repo /etc/yum.repos.d/
-RUN yum install -y libmnl libnetfilter_conntrack openvswitch \
+# ADD https://copr.fedoraproject.org/coprs/maxamillion/origin-next/repo/epel-7/maxamillion-origin-next-epel-7.repo /etc/yum.repos.d/
+
+RUN yum install -y wget tar make gcc openssl python perl && yum clean all
+
+# Install openvswitch from the source
+RUN mkdir openvswitch && cd ./openvswitch
+RUN wget http://openvswitch.org/releases/openvswitch-2.4.0.tar.gz
+RUN tar -xvf openvswitch-2.4.0.tar.gz
+RUN cd openvswitch-2.4.0/ && ./configure && make && make install
+
+RUN yum install -y libmnl libnetfilter_conntrack \
     libnfnetlink iptables iproute bridge-utils procps-ng ethtool socat openssl \
     binutils xz kmod-libs kmod sysvinit-tools device-mapper-libs dbus \
     && yum clean all
