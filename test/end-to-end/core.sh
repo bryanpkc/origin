@@ -55,7 +55,7 @@ MASTER_SERVICE_IP="$(dig @${API_HOST} "kubernetes.default.svc.cluster.local." +s
 openshift admin policy add-role-to-user view e2e-user --namespace=default
 
 # pre-load some image streams and templates
-oc create -f examples/image-streams/image-streams-centos7.json --namespace=openshift
+oc create -f examples/image-streams/image-streams-rhel7.json --namespace=openshift
 oc create -f examples/sample-app/application-template-stibuild.json --namespace=openshift
 oc create -f examples/jenkins/application-template.json --namespace=openshift
 oc create -f examples/db-templates/mongodb-ephemeral-template.json --namespace=openshift
@@ -113,7 +113,7 @@ docker login -u e2e-user -p ${e2e_user_token} -e e2e-user@openshift.com ${DOCKER
 echo "[INFO] Docker login successful"
 
 echo "[INFO] Tagging and pushing ruby-s390x to ${DOCKER_REGISTRY}/cache/ruby-s390x:latest"
-docker tag -f s390x/ruby-s390x:latest ${DOCKER_REGISTRY}/cache/ruby-s390x:latest
+docker tag -f s390x/ruby:latest ${DOCKER_REGISTRY}/cache/ruby-s390x:latest
 docker push ${DOCKER_REGISTRY}/cache/ruby-s390x:latest
 echo "[INFO] Pushed ruby-s390x"
 
